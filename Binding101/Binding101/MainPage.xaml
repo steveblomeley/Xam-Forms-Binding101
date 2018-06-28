@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Binding101"
+             x:Class="Binding101.MainPage">
+
+    <ContentPage.BindingContext>
+        <local:MainViewModel />
+    </ContentPage.BindingContext>
+    
+    <StackLayout Padding="20">
+    	<Label Text="Simple 2-way Binding Demo" 
+           HorizontalOptions="Center"
+           FontAttributes="Bold" />
+        <Entry Text="{Binding Forename}" Placeholder="Your first name ..." />
+        <Entry Text="{Binding Surname}" Placeholder="Your family name ..." />
+        <StackLayout Orientation="Horizontal">
+            <Label Text="Your Name : " />
+            <Label Text="{Binding Fullname}" />
+        </StackLayout>
+        <BoxView />
+        <Slider x:Name="Rotation" Maximum="360" />
+        <Label BindingContext="{x:Reference Rotation}" Text="{Binding Value}" />
+        <Image Source="pips.jpg" BindingContext="{x:Reference Rotation}" Rotation="{Binding Value}" Margin="0,50,0,0" />
+    </StackLayout>
+
+</ContentPage>
