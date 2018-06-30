@@ -12,7 +12,11 @@
     	<Label Text="Simple 2-way Binding Demo" 
            HorizontalOptions="Center"
            FontAttributes="Bold" />
-        <Entry Text="{Binding Forename}" Placeholder="Your first name ..." />
+        <Entry Text="{Binding Forename}" Placeholder="Your first name ..." >
+            <Entry.Behaviors>
+                <local:UppercaseRedBehavior></local:UppercaseRedBehavior>
+            </Entry.Behaviors>
+        </Entry>
         <Entry Text="{Binding Surname}" Placeholder="Your family name ..." />
         <StackLayout Orientation="Horizontal">
             <Label Text="Your Name : " />

@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
 
 namespace Binding101
 {
@@ -16,8 +17,8 @@ namespace Binding101
                 if (value == _forename) return;
 
                 _forename = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Forename"));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Fullname"));
+                OnPropertyChange();
+                OnPropertyChange(nameof(Fullname));
             }
         }
 
@@ -31,11 +32,30 @@ namespace Binding101
                 if (value == _surname) return;
 
                 _surname = value;
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Surname"));
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Fullname"));
+                OnPropertyChange();
+                OnPropertyChange(nameof(Fullname));
+            }
+        }
+
+        private int _age;
+
+        public int Age
+        {
+            get => _age;
+            set
+            {
+                if (_age == value) return;
+
+                _age = value;
+                OnPropertyChange();
             }
         }
 
         public string Fullname => $"{Forename} {Surname}";
+
+        private void OnPropertyChange([CallerMemberName] string propertyName = "")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
     }
 }
